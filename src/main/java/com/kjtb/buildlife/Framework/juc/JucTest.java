@@ -2,6 +2,7 @@ package com.kjtb.buildlife.Framework.juc;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -26,10 +27,35 @@ public class JucTest {
         JucTest t = new JucTest();
 //        t.unsafeTest();
 //        t.testInterrupt();
+//        int i = Runtime.getRuntime().availableProcessors();
+//
+//        t.completablFutureTest();
 
-        t.completablFutureTest();
-        System.out.println();
+        // 0 1 1 2 3 5 8 13 21
+        int idx = getFibByIdx(8);
+
+        System.out.println(idx);
     }
+
+    public static int getFibByIdx(int i) {
+        int[] arr = new int[i + 1];
+        Arrays.fill(arr, -1);
+
+        if (i == 0) return 0;
+        if (i == 1) return 1;
+        arr[0] = 0;
+        arr[1] = 1;
+
+        for (int j = 2; j <= i; j++) {
+            int t = arr[j];
+            if (t == -1) {
+                arr[j] = arr[j - 1] + arr[j - 2];
+            }
+        }
+        return arr[i];
+    }
+
+
 
     <T> T forkJoinTask() {
 

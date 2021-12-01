@@ -122,7 +122,6 @@ public class Sort101 extends Base {
         mergeSort(a, aux, start, mid);
         mergeSort(a, aux, mid + 1, end);
 
-
         int s1 = start;
         int s2 = mid + 1;
         int k = start;

@@ -39,6 +39,7 @@ public class TryCatchReturn {
 
     static int test2() {
 
+
         Integer i = new Integer(0);
         try {
             System.out.println("try");

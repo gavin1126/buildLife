@@ -21,8 +21,16 @@ import java.util.HashMap;
  * @Date 2021-06-30
  **/
 public class DP101 {
+    public static void main(String[] args) {
+        DP101 t = new DP101();
+        int fib = t.fib(4);
 
-    int res = Integer.MAX_VALUE;
+        System.out.println();
+    }
+
+
+    int ans = Integer.MAX_VALUE;
+    int[] coins = {1, 2, 5};
     // dp[]大小不确定时，可以用map代替
     HashMap<Integer, Integer> map = new HashMap<>();
 
@@ -30,33 +38,24 @@ public class DP101 {
     状态：
     dp含义 y=f(x) x代表目标金额，y代表最少的硬币数
     转移方程 dp[i] = min(res,dp[i-1]+1)
-    base:dp[0]=0
+    baseCase:
+        dp[i]= 0; if i=0
+        dp[i]= -1; if i<0
+        dp[i]= min(dp[i],dp[i-1]+1); if i>0
+
+    v1 without dp
      */
-    int coinChange(int[] coins, int amount) {
-        if (map.containsKey(amount)) {
-            return map.get(amount);
+    int coinChangeV1(int[] coins, int amount) {
+        for (int coin : coins) {
+            int rest = amount - coin;
+            if (rest == 0) return 0;
+            if (rest < 0) return -1;
+            ans = Math.min(ans, coinChangeV1(coins, rest));
         }
-        if (amount == 0) {
-            return 0;
-        }
-        if (amount < 0) {
-            return -1;
-        }
-
-        for (int c : coins) {
-            int rest = amount - c;
-            int sub = coinChange(coins, rest);
-            if (sub == -1) {
-                // 无解
-                continue;
-            }
-            res = Math.min(res, sub + 1);
-        }
-
-        res = res == Integer.MAX_VALUE ? -1 : res;
-        map.put(amount, res);
-        return res;
+        return ans == Integer.MAX_VALUE ? -1 : ans;
     }
+
+
 
     /*
     dp-memo
@@ -92,10 +91,5 @@ public class DP101 {
         }
     }
 
-    public static void main(String[] args) {
-        DP101 t = new DP101();
-        int fib = t.fib(4);
 
-        System.out.println();
-    }
 }

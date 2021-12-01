@@ -1,5 +1,3 @@
-
-
 # why
 大格局，大愿景，振起，相信你的未来不是梦！
 
@@ -32,3 +30,8 @@ coding and minding
 
 # note
 fixme 注释是指，一些反思总结，不是绝对的，而是可迭代进化的
+
+
+# framework core
+CI： maven Project Object Model, POM; different phases
+CD: jenkens using pipeline to auto everything 
